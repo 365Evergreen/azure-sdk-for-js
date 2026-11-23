@@ -283,7 +283,7 @@ const poller = await computeClient.dedicatedHosts.beginCreateOrUpdate(
   parameter
 );
 poller.onProgress((state) => {
-  console.log(`Are we done yet? ${Boolean(state.isCompleted)}`);
+  console.log(`Are we done yet? ${state.status}`);
 })
 const result = await poller.pollUntilDone().then((response) => {
   console.log(response);
@@ -317,7 +317,8 @@ await computeClient.dedicatedHosts
       <pre lang="typescript">
 const computeClient = new compute.ComputeManagementClient(credential, subscriptionId);
 await computeClient.dedicatedHosts
-  .beginCreateOrUpdateAndWait(resourceGroupName, hostGroupName, hostName, parameter)
+  .createOrUpdate(resourceGroupName, hostGroupName, hostName, parameter)
+  .pollUntilDone()
   .then((response) => {
     console.log(response);
   });

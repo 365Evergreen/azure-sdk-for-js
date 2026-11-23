@@ -435,11 +435,11 @@ async function createVirtualNetwork() {
       addressPrefixes: ["10.0.0.0/16"],
     },
   };
-  const poller_result = await networkClient.virtualNetworks.beginCreateOrUpdateAndWait(
+  const poller_result = await networkClient.virtualNetworks.createOrUpdate(
     resourceGroupName,
     networkName,
     parameter,
-  );
+  ).pollUntilDone();
   console.log(poller_result);
   const virtualNetworks_create_info = await networkClient.virtualNetworks.get(
     resourceGroupName,
@@ -459,11 +459,11 @@ async function createVirtualNetwork() {
       addressPrefixes: ["10.0.0.0/16"],
     },
   };
-  const poller_result = await networkClient.virtualNetworks.beginCreateOrUpdateAndWait(
+  const poller_result = await networkClient.virtualNetworks.createOrUpdate(
     resourceGroupName,
     networkName,
     parameter,
-  );
+  ).pollUntilDone();
   console.log(poller_result);
   const virtualNetworks_create_info = await networkClient.virtualNetworks.get(
     resourceGroupName,
@@ -481,12 +481,12 @@ async function createSubnet() {
   const subnet_parameter: Subnet = {
     addressPrefix: "10.0.0.0/24",
   };
-  const poller_result = await networkClient.subnets.beginCreateOrUpdateAndWait(
+  const poller_result = await networkClient.subnets.createOrUpdate(
     resourceGroupName,
     networkName,
     subnetName,
     subnet_parameter,
-  );
+  ).pollUntilDone();
   console.log(poller_result);
   const subnet_create_info = await networkClient.subnets.get(
     resourceGroupName,
@@ -504,12 +504,12 @@ async function createSubnet() {
   const subnet_parameter = {
     addressPrefix: "10.0.0.0/24",
   };
-  const poller_result = await networkClient.subnets.beginCreateOrUpdateAndWait(
+  const poller_result = await networkClient.subnets.createOrUpdate(
     resourceGroupName,
     networkName,
     subnetName,
     subnet_parameter,
-  );
+  ).pollUntilDone();
   console.log(poller_result);
   const subnet_create_info = await networkClient.subnets.get(
     resourceGroupName,
@@ -544,11 +544,11 @@ async function createNetworkInterface(group_name: any, location: any, nic_name: 
       },
     ],
   };
-  const poller_result = await networkClient.networkInterfaces.beginCreateOrUpdateAndWait(
+  const poller_result = await networkClient.networkInterfaces.createOrUpdate(
     group_name,
     nic_name,
     parameter,
-  );
+  ).pollUntilDone();
   console.log(poller_result);
   const nic_info = await networkClient.networkInterfaces.get(group_name, nic_name);
   console.log(nic_info);
@@ -578,11 +578,11 @@ async function createNetworkInterface(group_name, location, nic_name) {
       },
     ],
   };
-  const poller_result = await networkClient.networkInterfaces.beginCreateOrUpdateAndWait(
+  const poller_result = await networkClient.networkInterfaces.createOrUpdate(
     group_name,
     nic_name,
     parameter,
-  );
+  ).pollUntilDone();
   console.log(poller_result);
   const nic_info = await networkClient.networkInterfaces.get(group_name, nic_name);
   console.log(nic_info);
@@ -655,11 +655,11 @@ async function createVirtualMachines() {
       ],
     },
   };
-  const poller_result = await computeClient.virtualMachines.beginCreateOrUpdateAndWait(
+  const poller_result = await computeClient.virtualMachines.createOrUpdate(
     resourceGroupName,
     virtualMachineName,
     parameter,
-  );
+  ).pollUntilDone();
   console.log(poller_result);
   const res = await computeClient.virtualMachines.get(resourceGroupName, virtualMachineName);
   console.log(res);
@@ -731,11 +731,11 @@ async function createVirtualMachines() {
       ],
     },
   };
-  const poller_result = await computeClient.virtualMachines.beginCreateOrUpdateAndWait(
+  const poller_result = await computeClient.virtualMachines.createOrUpdate(
     resourceGroupName,
     virtualMachineName,
     parameter,
-  );
+  ).pollUntilDone();
   console.log(poller_result);
   const res = await computeClient.virtualMachines.get(resourceGroupName, virtualMachineName);
   console.log(res);
@@ -749,10 +749,10 @@ TypeScript or JavaScript
 
 ```typescript
 async function deleteVirtualMachine() {
-  const res = await computeClient.virtualMachines.beginDeleteAndWait(
+  const res = await computeClient.virtualMachines.delete(
     resourceGroupName,
     virtualMachineName,
-  );
+  ).pollUntilDone();
   console.log(res);
 }
 ```
